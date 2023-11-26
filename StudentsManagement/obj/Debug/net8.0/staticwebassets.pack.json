@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\StudentsManagement.bundle.scp.css",
+      "PackagePath": "staticwebassets\\StudentsManagement.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.StudentsManagement.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.StudentsManagement.props",
+      "PackagePath": "build\\StudentsManagement.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.StudentsManagement.props",
+      "PackagePath": "buildMultiTargeting\\StudentsManagement.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.StudentsManagement.props",
+      "PackagePath": "buildTransitive\\StudentsManagement.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -1,0 +1,37 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement.Client\\bin\\Debug\\net8.0\\wwwroot\\_framework\\blazor.webassembly.js",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js"
+    },
+    {
+      "Id": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement.Client\\obj\\Debug\\net8.0\\compressed\\rtka3d7xoj.gz",
+      "PackagePath": "staticwebassets\\_framework\\blazor.webassembly.js.gz"
+    },
+    {
+      "Id": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement.Client\\wwwroot\\appsettings.Development.json",
+      "PackagePath": "staticwebassets\\appsettings.Development.json"
+    },
+    {
+      "Id": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement.Client\\wwwroot\\appsettings.json",
+      "PackagePath": "staticwebassets\\appsettings.json"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.StudentsManagement.Client.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.StudentsManagement.Client.props",
+      "PackagePath": "build\\StudentsManagement.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.StudentsManagement.Client.props",
+      "PackagePath": "buildMultiTargeting\\StudentsManagement.Client.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.StudentsManagement.Client.props",
+      "PackagePath": "buildTransitive\\StudentsManagement.Client.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
