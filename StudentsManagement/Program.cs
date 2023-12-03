@@ -1,10 +1,13 @@
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using StudentsManagement.Client.Pages;
 using StudentsManagement.Components;
 using StudentsManagement.Components.Account;
 using StudentsManagement.Data;
+using StudentsManagement.Services;
+using StudentsManagement.Shared.StudentRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,6 +39,14 @@ builder.Services.AddIdentityCore<ApplicationUser>(options => options.SignIn.Requ
     .AddDefaultTokenProviders();
 
 builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
+
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+
+builder.Services.AddScoped(http => new HttpClient
+{
+    BaseAddress = new Uri(builder.Configuration.GetSection("BaseAddress").Value!)
+});
+
 
 var app = builder.Build();
 

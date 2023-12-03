@@ -1036,3 +1036,13 @@ D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Cli
 D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\obj\Debug\net8.0\refint\StudentsManagement.Client.dll
 D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\obj\Debug\net8.0\StudentsManagement.Client.pdb
 D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\obj\Debug\net8.0\ref\StudentsManagement.Client.dll
+D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\bin\Debug\net8.0\wwwroot\_framework\StudentsManagement.Shared.pdb
+D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\bin\Debug\net8.0\wwwroot\_framework\StudentsManagement.Shared.wasm
+D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\bin\Debug\net8.0\wwwroot\_framework\StudentsManagement.Shared.pdb.gz
+D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\bin\Debug\net8.0\wwwroot\_framework\StudentsManagement.Shared.wasm.gz
+D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\bin\Debug\net8.0\StudentsManagement.Shared.dll
+D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\bin\Debug\net8.0\StudentsManagement.Shared.pdb
+D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\obj\Debug\net8.0\StudentsManagement.Client.sourcelink.json
+D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\obj\Debug\net8.0\webcil\StudentsManagement.Shared.wasm
+D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\obj\Debug\net8.0\compressed\xpl4r8927a.gz
+D:\Content Creation\.NET Core Projects\StudentsManagement\StudentsManagement.Client\obj\Debug\net8.0\compressed\nirfyc7pfm.gz

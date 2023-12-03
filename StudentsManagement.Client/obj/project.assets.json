@@ -525,6 +525,16 @@
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
         }
+      },
+      "StudentsManagement.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/StudentsManagement.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/StudentsManagement.Shared.dll": {}
+        }
       }
     },
     "net8.0/browser-wasm": {
@@ -1044,6 +1054,16 @@
         },
         "build": {
           "buildTransitive/net6.0/System.Text.Json.targets": {}
+        }
+      },
+      "StudentsManagement.Shared/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/StudentsManagement.Shared.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/StudentsManagement.Shared.dll": {}
         }
       }
     }
@@ -1982,6 +2002,11 @@
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
+    },
+    "StudentsManagement.Shared/1.0.0": {
+      "type": "project",
+      "path": "../StudentsManagement.Shared/StudentsManagement.Shared.csproj",
+      "msbuildProject": "../StudentsManagement.Shared/StudentsManagement.Shared.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1989,7 +2014,8 @@
       "Microsoft.AspNetCore.Components.WebAssembly >= 8.0.0",
       "Microsoft.AspNetCore.Components.WebAssembly.Authentication >= 8.0.0",
       "Microsoft.NET.ILLink.Tasks >= 8.0.0",
-      "Microsoft.NET.Sdk.WebAssembly.Pack >= 8.0.0"
+      "Microsoft.NET.Sdk.WebAssembly.Pack >= 8.0.0",
+      "StudentsManagement.Shared >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -2024,7 +2050,11 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement.Shared\\StudentsManagement.Shared.csproj": {
+              "projectPath": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement.Shared\\StudentsManagement.Shared.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
