@@ -1,0 +1,67 @@
+﻿@page "/students-list"
+@using StudentsManagement.Shared.Models
+@rendermode InteractiveAuto
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header"> Students List</div>
+                @if (AllStudents != null && AllStudents.Count > 0)
+                {
+                    <div class="card-body">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Id</th>
+                                    <th>FirstName</th>
+                                    <th>MiddleName</th>
+                                    <th>LastName</th>
+                                    <th>Email</th>
+                                    <th>PhoNo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var student in AllStudents)
+                                {
+                                    <tr>
+                                    <td>@student.Id</td>
+                                    <td>@student.FirstName</td>
+                                    <td>@student.MiddleName</td>
+                                    <td>@student.LastName</td>
+                                    <td>@student.EmailAddress</td>
+                                    <td>@student.PhoneNumber</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-info"> There is not Students List Availlable</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code{
+    private List<Student> AllStudents = new List<Student>();
+
+    private async Task LoadAlLStudents()
+    {
+        var students = await StudentService.GetAllStudentsAsync();
+        AllStudents.Clear();
+        if (students is null) return;
+        foreach (var student in students)
+        {
+            AllStudents.Add(student);
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAlLStudents();
+    }
+}
