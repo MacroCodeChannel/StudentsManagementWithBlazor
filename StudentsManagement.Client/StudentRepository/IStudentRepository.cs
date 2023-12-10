@@ -1,11 +1,7 @@
-﻿using StudentsManagement.Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using StudentsManagement.Shared.Models;
 
-namespace StudentsManagement.Shared.StudentRepository
+namespace StudentsManagement.Client.StudentRepository
 {
     public  interface IStudentRepository
     {

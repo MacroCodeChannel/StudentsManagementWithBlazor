@@ -1,5 +1,5 @@
-﻿using StudentsManagement.Shared.Models;
-using StudentsManagement.Shared.StudentRepository;
+﻿using StudentsManagement.Client.StudentRepository;
+using StudentsManagement.Shared.Models;
 using System.Net.Http.Json;
 
 namespace StudentsManagement.Client.Services
@@ -11,6 +11,8 @@ namespace StudentsManagement.Client.Services
         { 
             this._httpClient = httpClient;
         }
+
+
         public async Task<Student> AddStudentAsync(Student student)
         {
             var newstudent = await _httpClient.PostAsJsonAsync("api/Student/Add-Student", student);
@@ -18,9 +20,9 @@ namespace StudentsManagement.Client.Services
             return response;
         }
 
-        public async Task<Student> DeleteStudentAsync(int studentId)
+        public async Task<Student> DeleteStudentAsync(int id)
         {
-            var newstudent = await _httpClient.PostAsJsonAsync("api/Student/Delete-Student", studentId);
+            var newstudent = await _httpClient.DeleteAsync($"api/Student/DeleteStudent/{id}");
             var response = await newstudent.Content.ReadFromJsonAsync<Student>();
             return response;
         }

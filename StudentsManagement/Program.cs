@@ -1,13 +1,15 @@
+using Azure;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using StudentsManagement.Client.Pages;
+using StudentsManagement.Client.StudentRepository;
 using StudentsManagement.Components;
 using StudentsManagement.Components.Account;
 using StudentsManagement.Data;
 using StudentsManagement.Services;
-using StudentsManagement.Shared.StudentRepository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +49,20 @@ builder.Services.AddScoped(http => new HttpClient
     BaseAddress = new Uri(builder.Configuration.GetSection("BaseAddress").Value!)
 });
 
+builder.Services.Configure<CookiePolicyOptions>(options =>
+{
+    options.MinimumSameSitePolicy = SameSiteMode.None;
+    options.Secure = CookieSecurePolicy.Always;
+});
+
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.SameSite = SameSiteMode.None;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
+});
+builder.Services.Configure<CookieAuthenticationOptions>(IdentityConstants.ApplicationScheme, x => x.Cookie.SameSite = SameSiteMode.None);
+
+builder.Services.AddCors();
 
 var app = builder.Build();
 
@@ -64,10 +80,10 @@ else
 }
 
 app.UseHttpsRedirection();
-
+app.UseCookiePolicy();
 app.UseStaticFiles();
 app.UseAntiforgery();
-
+app.UseCors();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()

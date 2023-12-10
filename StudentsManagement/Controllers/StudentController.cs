@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StudentsManagement.Client.StudentRepository;
 using StudentsManagement.Shared.Models;
-using StudentsManagement.Shared.StudentRepository;
 
 namespace StudentsManagement.Controllers
 {
@@ -42,7 +42,7 @@ namespace StudentsManagement.Controllers
         }
 
 
-        [HttpPost("Delete-Student/{id}")]
+        [HttpDelete("DeleteStudent/{id}")]
         public async Task<ActionResult<Student>> DeleteStudentAsync(int id)
         {
             var deletestudent = await _studentRepository.DeleteStudentAsync(id);

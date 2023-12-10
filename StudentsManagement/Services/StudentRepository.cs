@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StudentsManagement.Client.StudentRepository;
 using StudentsManagement.Data;
 using StudentsManagement.Shared.Models;
-using StudentsManagement.Shared.StudentRepository;
 
 namespace StudentsManagement.Services
 {
