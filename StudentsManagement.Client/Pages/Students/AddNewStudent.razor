@@ -1,24 +1,24 @@
-﻿@page "/student/add"
-@inject NavigationManager navigation;
+﻿@page "/add-student"
 @using StudentsManagement.Client.Services;
-@using StudentsManagement.Shared.Models;
-@inject IJSRuntime js;
-
+@using StudentsManagement.Shared.Models
+@inject NavigationManager navigation;
+@inject IJSRuntime JsRuntime
 
 <h3>Add New Student</h3>
+
 <hr />
 <div class="row">
     <div class="col-md-12">
-        <EditForm Model="studobj" OnValidSubmit="CreateStudent" FormName="managestudent">
-            <DataAnnotationsValidator/>
-            <ValidationSummary/>
+        <EditForm Model="studobj" OnValidSubmit="CreateStudent" FormName="addstudent">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">First Name</label>
-                            <InputText for="FirstName" class="form-control" @bind-Value="@studobj.FirstName" />
-                             <ValidationMessage For="()=>studobj.FirstName"/>
+                            <InputText for="FirstName" class="form-control" @bind-Value="@studobj.FirstName"/>
+                            <ValidationMessage For="()=>studobj.FirstName"/>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -30,16 +30,23 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label  class="control-label">Last Name</label>
+                            <label class="control-label">Last Name</label>
                             <InputText for="LastName" class="form-control" @bind-Value="@studobj.LastName" />
                             <ValidationMessage For="()=>studobj.LastName" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label  class="control-label">Email Address</label>
+                            <label class="control-label">Email Address</label>
                             <InputText for="EmailAddress" class="form-control" @bind-Value="@studobj.EmailAddress" />
                             <ValidationMessage For="()=>studobj.EmailAddress" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Student Address</label>
+                            <InputText for="Address" class="form-control" @bind-Value="@studobj.Address" />
+                            <ValidationMessage For="()=>studobj.Address" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -51,22 +58,15 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label  class="control-label">Student Address</label>
-                            <InputText for="Address" class="form-control" @bind-Value="@studobj.Address" />
-                            <ValidationMessage For="()=>studobj.Address" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label  class="control-label">Student Country</label>
+                            <label class="control-label">Student Country</label>
                             <InputText for="Country" class="form-control" @bind-Value="@studobj.Country" />
                             <ValidationMessage For="()=>studobj.Country" />
                         </div>
                     </div>
-                    <div class="form-group mt-4">
-                        <button type="submit" class="btn btn-primary">Save Student</button>
-                        <button type="submit" class="btn btn-danger">Cancel</button>
-                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">Save Student</button>
+                    <button type="button" @onclick="()=>Cancel()" class="btn btn-danger">Back to List</button>
                 </div>
             </div>
         </EditForm>
@@ -79,14 +79,12 @@
     [SupplyParameterFromForm]
     public Student studobj { get; set; } = new();
 
-
     protected async Task CreateStudent()
     {
         var result = await StudentService.AddStudentAsync(studobj);
         navigation.NavigateTo("/students-list");
     }
-
-    void Cancel()
+    public void Cancel()
     {
         navigation.NavigateTo("/students-list");
     }

@@ -1,18 +1,21 @@
 ﻿@page "/student/delete/{id:int}"
-@inject NavigationManager navigation;
 @using StudentsManagement.Client.Services;
-@using StudentsManagement.Shared.Models;
+@using StudentsManagement.Shared.Models
+@inject NavigationManager navigation;
+@inject IJSRuntime JsRuntime
 @rendermode InteractiveServer
 
-<h3>Delete Student</h3>
+
+<h3>Delete Student Details</h3>
+
 <hr />
 <div class="row">
     <div class="col-md-12">
-       <table class="table">
-           <tr>
+        <table class="table">
+            <tr>
                 <th>First Name</th>
                 <td>@studobj.FirstName</td>
-           </tr>
+            </tr>
             <tr>
                 <th>Middle Name</th>
                 <td>@studobj.MiddleName</td>
@@ -26,32 +29,33 @@
                 <td>@studobj.EmailAddress</td>
             </tr>
             <tr>
-                <th>Address</th>
+                <th>Student Address</th>
                 <td>@studobj.Address</td>
             </tr>
             <tr>
-                <th>Phone No</th>
+                <th>Phone Number</th>
                 <td>@studobj.PhoneNumber</td>
             </tr>
-            <tr>
+             <tr>
                 <th>Country</th>
                 <td>@studobj.Country</td>
             </tr>
-       </table>
-       <div class="form-group">
-            <button type="submit" class="btn btn-danger" @onclick="Delete">Delete Student</button>
-            <button type="submit" class="btn btn-dafault" @onclick="Cancel">Cancel</button>
-       </div>
+        </table>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary" @onclick="Delete">Delete Student</button>
+        <button type="button" class="btn btn-danger" >Cancel</button>
     </div>
 </div>
 
 
-@code {
 
+@code {
     public Student studobj { get; set; } = new();
 
     [Parameter]
     public int id { get; set; }
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -62,12 +66,13 @@
         studobj = await StudentService.GetStudentByIdAsync(id);
     }
 
+
     protected async Task Delete()
     {
         var result = await StudentService.DeleteStudentAsync(id);
         navigation.NavigateTo("/students-list");
     }
-    void Cancel()
+    public void Cancel()
     {
         navigation.NavigateTo("/students-list");
     }

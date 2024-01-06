@@ -1,0 +1,51 @@
+﻿@page "/add-country"
+@using StudentsManagement.Client.Services;
+@using StudentsManagement.Shared.Models
+@inject NavigationManager navigation;
+@inject IJSRuntime JsRuntime
+
+<h3>Add Country</h3>
+<div class="row">
+    <div class="col-md-12">
+        <EditForm Model="countryobj" OnValidSubmit="CreateCountry" FormName="addCountry">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Country Code</label>
+                            <InputText for="Code" class="form-control" @bind-Value="@countryobj.Code" />
+                            <ValidationMessage For="()=>countryobj.Code" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Country Name</label>
+                            <InputText for="Name" class="form-control" @bind-Value="@countryobj.Name" />
+                            <ValidationMessage For="()=>countryobj.Name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">Save Country</button>
+                    <button type="button" @onclick="()=>Cancel()" class="btn btn-danger">Back to List</button>
+                </div>
+            </div>
+        </EditForm>
+    </div>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    public Country countryobj { get; set; } = new();
+
+    protected async Task CreateCountry()
+    {
+        navigation.NavigateTo("/students-list");
+    }
+    public void Cancel()
+    {
+        navigation.NavigateTo("/students-list");
+    }
+}

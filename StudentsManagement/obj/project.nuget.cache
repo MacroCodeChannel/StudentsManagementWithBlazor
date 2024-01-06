@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "IWRxc03D+fbeHlYflihH4y4STG8MjsSLuebuKmDy+fi4s69QCoub2kzD6jt5EKbZEooh7NEZulVoezHyI86iYg==",
+  "dgSpecHash": "rM2elK3fZN0SGcDQzkeX8Ov/i0CnQRM6FttvLMqO7zKyqJFApTrphnCtRdh60g0VTBRdj7doDqU9dvsSvA6agA==",
   "success": true,
   "projectFilePath": "D:\\Content Creation\\.NET Core Projects\\StudentsManagement\\StudentsManagement\\StudentsManagement.csproj",
   "expectedPackageFiles": [
@@ -61,6 +61,8 @@
     "C:\\Users\\obadi\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\8.0.0\\microsoft.aspnetcore.components.analyzers.8.0.0.nupkg.sha512",
     "C:\\Users\\obadi\\.nuget\\packages\\microsoft.aspnetcore.components.authorization\\8.0.0\\microsoft.aspnetcore.components.authorization.8.0.0.nupkg.sha512",
     "C:\\Users\\obadi\\.nuget\\packages\\microsoft.aspnetcore.components.forms\\8.0.0\\microsoft.aspnetcore.components.forms.8.0.0.nupkg.sha512",
+    "C:\\Users\\obadi\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.0\\microsoft.aspnetcore.components.quickgrid.8.0.0.nupkg.sha512",
+    "C:\\Users\\obadi\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid.entityframeworkadapter\\8.0.0\\microsoft.aspnetcore.components.quickgrid.entityframeworkadapter.8.0.0.nupkg.sha512",
     "C:\\Users\\obadi\\.nuget\\packages\\microsoft.aspnetcore.components.web\\8.0.0\\microsoft.aspnetcore.components.web.8.0.0.nupkg.sha512",
     "C:\\Users\\obadi\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly\\8.0.0\\microsoft.aspnetcore.components.webassembly.8.0.0.nupkg.sha512",
     "C:\\Users\\obadi\\.nuget\\packages\\microsoft.aspnetcore.components.webassembly.authentication\\8.0.0\\microsoft.aspnetcore.components.webassembly.authentication.8.0.0.nupkg.sha512",

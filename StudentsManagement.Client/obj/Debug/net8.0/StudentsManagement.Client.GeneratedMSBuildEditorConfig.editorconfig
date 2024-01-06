@@ -30,8 +30,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Content Creation/.NET Core Projects/StudentsManagement/StudentsManagement.Client/Pages/Students/AddStudent.razor]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudHNcQWRkU3R1ZGVudC5yYXpvcg==
+[D:/Content Creation/.NET Core Projects/StudentsManagement/StudentsManagement.Client/Pages/Countries/AddCountry.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRyaWVzXEFkZENvdW50cnkucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Content Creation/.NET Core Projects/StudentsManagement/StudentsManagement.Client/Pages/Countries/CountriesList.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRyaWVzXENvdW50cmllc0xpc3QucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Content Creation/.NET Core Projects/StudentsManagement/StudentsManagement.Client/Pages/Students/AddNewStudent.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU3R1ZGVudHNcQWRkTmV3U3R1ZGVudC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Content Creation/.NET Core Projects/StudentsManagement/StudentsManagement.Client/Pages/Students/DeleteStudent.razor]

@@ -1,14 +1,17 @@
 ﻿@page "/student/edit/{id:int}"
-@inject NavigationManager navigation;
 @using StudentsManagement.Client.Services;
-@using StudentsManagement.Shared.Models;
+@using StudentsManagement.Shared.Models
+@inject NavigationManager navigation;
+@inject IJSRuntime JsRuntime
 @rendermode InteractiveServer
 
+
 <h3>Update Student Details</h3>
+
 <hr />
 <div class="row">
     <div class="col-md-12">
-        <EditForm Model="studobj" OnValidSubmit="UpdateStudent" FormName="managestudent">
+        <EditForm Model="studobj" OnValidSubmit="UpdateStudent" FormName="updatestudent">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="col-md-12">
@@ -43,16 +46,16 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label">Phone Number</label>
-                            <InputText for="PhoneNumber" class="form-control" @bind-Value="@studobj.PhoneNumber" />
-                            <ValidationMessage For="()=>studobj.PhoneNumber" />
+                            <label class="control-label">Student Address</label>
+                            <InputText for="Address" class="form-control" @bind-Value="@studobj.Address" />
+                            <ValidationMessage For="()=>studobj.Address" />
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label">Student Address</label>
-                            <InputText for="Address" class="form-control" @bind-Value="@studobj.Address" />
-                            <ValidationMessage For="()=>studobj.Address" />
+                            <label class="control-label">Phone Number</label>
+                            <InputText for="PhoneNumber" class="form-control" @bind-Value="@studobj.PhoneNumber" />
+                            <ValidationMessage For="()=>studobj.PhoneNumber" />
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -62,10 +65,10 @@
                             <ValidationMessage For="()=>studobj.Country" />
                         </div>
                     </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Save Student</button>
-                        <button type="submit" class="btn btn-danger">Cancel</button>
-                    </div>
+                </div>
+                <div class="form-group mt-4">
+                    <button type="submit" class="btn btn-primary">Update Student</button>
+                    <button type="button" @onclick="()=>Cancel()" class="btn btn-danger">Back to List</button>
                 </div>
             </div>
         </EditForm>
@@ -75,11 +78,13 @@
 
 @code {
 
+    [SupplyParameterFromForm]
     public Student studobj { get; set; } = new();
 
 
     [Parameter]
     public int id { get; set; }
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -89,13 +94,14 @@
     {
         studobj = await StudentService.GetStudentByIdAsync(id);
     }
+
+
     protected async Task UpdateStudent()
     {
-        await StudentService.UpdateStudentAsync(studobj);
+        var result = await StudentService.UpdateStudentAsync(studobj);
         navigation.NavigateTo("/students-list");
     }
-
-    void Cancel()
+    public void Cancel()
     {
         navigation.NavigateTo("/students-list");
     }
