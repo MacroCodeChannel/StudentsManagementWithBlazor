@@ -1,12 +1,16 @@
-﻿@page "/add-country"
+﻿@page "/country/edit/{id:int}"
 @using StudentsManagement.Client.Services;
 @using StudentsManagement.Shared.Models
 @inject NavigationManager navigation;
+@inject IJSRuntime JsRuntime
+@rendermode InteractiveServer
 
-<h3>Add Country</h3>
+<h3>Update Country Details</h3>
+
+<hr />
 <div class="row">
     <div class="col-md-12">
-        <EditForm Model="countryobj" OnValidSubmit="CreateCountry" FormName="addCountry">
+        <EditForm Model="countryobj" OnValidSubmit="UpdateCountry" FormName="updateCountry">
             <DataAnnotationsValidator />
             <ValidationSummary />
             <div class="col-md-12">
@@ -25,9 +29,9 @@
                             <ValidationMessage For="()=>countryobj.Name" />
                         </div>
                     </div>
-                </div>
+                    </div>
                 <div class="form-group mt-4">
-                    <button type="submit" class="btn btn-primary">Save Country</button>
+                    <button type="submit" class="btn btn-primary">Update Country</button>
                     <button type="button" @onclick="()=>Cancel()" class="btn btn-danger">Back to List</button>
                 </div>
             </div>
@@ -36,12 +40,28 @@
 </div>
 
 @code {
+
     [SupplyParameterFromForm]
     public Country countryobj { get; set; } = new();
 
-    protected async Task CreateCountry()
+
+    [Parameter]
+    public int id { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
     {
-        var result = await CountryService.AddAsync(countryobj);
+        await LoadCountry();
+    }
+    public async Task LoadCountry()
+    {
+        countryobj = await CountryService.GetByIdAsync(id);
+    }
+
+
+    protected async Task UpdateCountry()
+    {
+        var result = await CountryService.UpdateAsync(countryobj);
         navigation.NavigateTo("/countries-list");
     }
     public void Cancel()

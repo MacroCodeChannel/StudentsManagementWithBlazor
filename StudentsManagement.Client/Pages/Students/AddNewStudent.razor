@@ -2,7 +2,7 @@
 @using StudentsManagement.Client.Services;
 @using StudentsManagement.Shared.Models
 @inject NavigationManager navigation;
-@inject IJSRuntime JsRuntime
+
 
 <h3>Add New Student</h3>
 
@@ -59,7 +59,13 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">Student Country</label>
-                            <InputText for="Country" class="form-control" @bind-Value="@studobj.Country" />
+                            <InputSelect for="Country" class="form-control" @bind-Value="@studobj.Country">
+                                <option value="">Select Country</option>
+                                @foreach(var country in Countries)
+                                {
+                                    <option  value="@country.Name">@country.Name</option>
+                                }
+                             </InputSelect>
                             <ValidationMessage For="()=>studobj.Country" />
                         </div>
                     </div>
@@ -79,9 +85,17 @@
     [SupplyParameterFromForm]
     public Student studobj { get; set; } = new();
 
+    List<Country> Countries = new List<Country>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Countries = await CountryService.GetAllAsync();
+    }
+
     protected async Task CreateStudent()
     {
         var result = await StudentService.AddStudentAsync(studobj);
+      
         navigation.NavigateTo("/students-list");
     }
     public void Cancel()

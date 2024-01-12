@@ -35,10 +35,10 @@
                                         <td>@country.Code</td>
                                         <td>@country.Name</td>
                                         <td>
-                                            <a class="btn btn-success" href="/student/edit/@country.Id"> Edit </a>
+                                            <a class="btn btn-success" href="/country/edit/@country.Id"> Edit </a>
                                         </td>
                                         <td>
-                                            <a class="btn btn-danger" href="/student/delete/@country.Id"> Delete </a>
+                                            <a class="btn btn-danger" href="/country/delete/@country.Id"> Delete </a>
                                         </td>
                                     </tr>
                                 }
@@ -55,6 +55,7 @@
     </div>
 </div>
 
+
 @code {
     public List<Country> AllCountries { get; set; } = new();
 
@@ -64,13 +65,12 @@
     }
     public async Task LoadAllCountries()
     {
-       // var students = await StudentService.GetAllStudentsAsync();
+        var countries = await CountryService.GetAllAsync();
+
+        if (countries is null) return;
+
         AllCountries.Clear();
-          /* 
-        if (students is null) return;
-        foreach (var student in students)
-        {
-            AllStudents.Add(student);
-        }*/
+
+        AllCountries.AddRange(countries);
     }
 }

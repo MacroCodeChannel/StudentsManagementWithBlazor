@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-        <p><a class="btn btn-success float-end" href="/add-student">Add New Student</a></p>
+        <p><a class="btn btn-success float-end" href="/add-student"> Add New Student </a></p>
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header"></div>
@@ -26,6 +26,7 @@
                                     <th>LastName</th>
                                     <th>Email</th>
                                     <th>PhoneNo</th>
+                                    <th>Country</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
                                 </tr>
@@ -40,6 +41,7 @@
                                         <td>@student.LastName</td>
                                         <td>@student.EmailAddress</td>
                                         <td>@student.PhoneNumber</td>
+                                        <td>@student.Country</td>
                                         <td>
                                             <a class="btn btn-success" href="/student/edit/@student.Id"> Edit </a>
                                         </td>
@@ -62,12 +64,14 @@
 </div>
 
 @code {
+
     public List<Student> AllStudents { get; set; } = new();
 
     protected override async Task OnInitializedAsync()
     {
         await LoadAlLStudents();
     }
+
     public async Task LoadAlLStudents()
     {
         var students = await StudentService.GetAllStudentsAsync();

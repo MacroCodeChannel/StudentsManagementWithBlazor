@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using StudentsManagement.Client.StudentRepository;
 using StudentsManagement.Data;
+using StudentsManagement.Services;
 using StudentsManagement.Shared.Models;
 
 namespace StudentsManagement.Controllers
@@ -14,25 +16,26 @@ namespace StudentsManagement.Controllers
     [ApiController]
     public class CountriesController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
-
-        public CountriesController(ApplicationDbContext context)
+        private readonly ICountryRepository _countryRepository;
+        public CountriesController(ICountryRepository countryRepository)
         {
-            _context = context;
+            this._countryRepository = countryRepository;
         }
 
         // GET: api/Countries
         [HttpGet("All-Countries")]
-        public async Task<ActionResult<IEnumerable<Country>>> GetAllCountries()
+        public async Task<ActionResult<List<Country>>> GetAllCountries()
         {
-            return await _context.Countries.ToListAsync();
+            var countries = await _countryRepository.GetAllAsync();
+
+            return Ok(countries);
         }
 
         // GET: api/Countries/5
         [HttpGet("Single-Country/{id}")]
         public async Task<ActionResult<Country>> GetSingleCountry(int id)
         {
-            var country = await _context.Countries.FindAsync(id);
+            var country = await _countryRepository.GetByIdAsync(id);
 
             if (country == null)
             {
@@ -42,67 +45,30 @@ namespace StudentsManagement.Controllers
             return country;
         }
 
-        // PUT: api/Countries/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("UpdateCountry/{id}")]
-        public async Task<IActionResult>UpdateSingleCountry(int id, Country country)
-        {
-            if (id != country.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(country).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CountryExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Countries
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost("Add-Country")]
-        public async Task<ActionResult<Country>> AddNewCountry(Country country)
+        public async Task<ActionResult<Student>> AddAsync(Country mod)
         {
-            _context.Countries.Add(country);
-            await _context.SaveChangesAsync();
+            var newcountry = await _countryRepository.AddAsync(mod);
 
-            return CreatedAtAction("GetCountry", new { id = country.Id }, country);
+            return Ok(newcountry);
         }
 
-        // DELETE: api/Countries/5
+
         [HttpDelete("DeleteCountry/{id}")]
-        public async Task<IActionResult> DeleteCountry(int id)
+        public async Task<ActionResult<Country>> DeleteAsync(int id)
         {
-            var country = await _context.Countries.FindAsync(id);
-            if (country == null)
-            {
-                return NotFound();
-            }
+            var deletecountry = await _countryRepository.DeleteAsync(id);
 
-            _context.Countries.Remove(country);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok(deletecountry);
         }
 
-        private bool CountryExists(int id)
+
+        [HttpPost("Update-Country")]
+        public async Task<ActionResult<Country>> UpdateAsync(Country country)
         {
-            return _context.Countries.Any(e => e.Id == id);
+            var updateCountry = await _countryRepository.UpdateAsync(country);
+
+            return Ok(updateCountry);
         }
     }
 }

@@ -20,8 +20,7 @@ namespace StudentsManagement.Controllers
         public  async Task<ActionResult<List<Student>>> GetAllStudentsAsync()
         {
             var students = await _studentRepository.GetAllStudentsAsync();
-
-                return Ok(students);
+            return Ok(students);
         }
 
 

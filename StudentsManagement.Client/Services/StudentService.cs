@@ -36,7 +36,7 @@ namespace StudentsManagement.Client.Services
 
         public async Task<Student> GetStudentByIdAsync(int studentId)
         {
-            var singlestudents = await _httpClient.GetAsync("api/Student/Single-Student");
+            var singlestudents = await _httpClient.GetAsync($"api/Student/Single-Student/{studentId}");
             var response = await singlestudents.Content.ReadFromJsonAsync<Student>();
             return response;
         }
