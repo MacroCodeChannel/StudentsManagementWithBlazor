@@ -22,14 +22,14 @@ namespace StudentsManagement.Controllers
         }
 
         // GET: api/SystemCodes
-        [HttpGet("All-SystemCodes")]
+        [HttpGet("All")]
         public async Task<ActionResult<IEnumerable<SystemCode>>> GetAllSystemCodes()
         {
             return await _context.SystemCodes.ToListAsync();
         }
 
         // GET: api/SystemCodes/5
-        [HttpGet("Single-SystemCode/{id}")]
+        [HttpGet("Single/{id}")]
         public async Task<ActionResult<SystemCode>> GetSingleSystemCode(int id)
         {
             var systemCode = await _context.SystemCodes.FindAsync(id);
@@ -44,7 +44,7 @@ namespace StudentsManagement.Controllers
 
         // PUT: api/SystemCodes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("Update-SystemCode/{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateSingleSystemCode(int id, SystemCode systemCode)
         {
             if (id != systemCode.Id)
@@ -75,7 +75,7 @@ namespace StudentsManagement.Controllers
 
         // POST: api/SystemCodes
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("Add-SystemCode")]
+        [HttpPost("Add")]
         public async Task<ActionResult<SystemCode>> AddNewSystemCode(SystemCode systemCode)
         {
             _context.SystemCodes.Add(systemCode);
@@ -85,7 +85,7 @@ namespace StudentsManagement.Controllers
         }
 
         // DELETE: api/SystemCodes/5
-        [HttpDelete("Delete-SystemCode/{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteSystemCode(int id)
         {
             var systemCode = await _context.SystemCodes.FindAsync(id);

@@ -1,0 +1,58 @@
+﻿@page "/add-systemCode"
+@using StudentsManagement.Shared.Models
+@inject NavigationManager navigation;
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Add New System Code</h3>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <EditForm Model="systemcodeobj" OnValidSubmit="CreateSystemCode" FormName="addSystemCode">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">System Code</label>
+                                        <InputText for="Code" class="form-control" @bind-Value="@systemcodeobj.Code" />
+                                        <ValidationMessage For="()=>systemcodeobj.Code" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">System Code Description</label>
+                                        <InputText for="Description" class="form-control" @bind-Value="@systemcodeobj.Description" />
+                                        <ValidationMessage For="()=>systemcodeobj.Description" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4">
+                                <button type="submit" class="btn btn-primary">Save System Code</button>
+                                <button type="button" @onclick="()=>Cancel()" class="btn btn-danger">Back to List</button>
+                            </div>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    [SupplyParameterFromForm]
+    public SystemCode systemcodeobj { get; set; } = new();
+
+    protected async Task CreateSystemCode()
+    {
+        var result = await SystemCodeService.AddAsync(systemcodeobj);
+
+        navigation.NavigateTo("/systemcodes-list");
+    }
+    public void Cancel()
+    {
+        navigation.NavigateTo("/systemcodes-list");
+    }
+}

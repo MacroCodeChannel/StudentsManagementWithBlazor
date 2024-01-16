@@ -1,35 +1,37 @@
 ﻿@page "/country/delete/{id:int}"
-@using StudentsManagement.Client.Services;
 @using StudentsManagement.Shared.Models
 @inject NavigationManager navigation;
 @inject IJSRuntime JsRuntime
 @rendermode InteractiveServer
 
-
-<h3>Delete Country Details</h3>
-
-<hr />
 <div class="row">
-    <div class="col-md-12">
-        <table class="table">
-            <tr>
-                <th>Country Code</th>
-                <td>@countryobj.Code</td>
-            </tr>
-            <tr>
-                <th>Country Name</th>
-                <td>@countryobj.Name</td>
-            </tr>
-            
-        </table>
-    </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary" @onclick="Delete"> Delete Country</button>
-        <button type="button" class="btn btn-danger">Cancel</button>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Delete Country Details</h3>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <table class="table">
+                        <tr>
+                            <th>Country Code</th>
+                            <td>@countryobj.Code</td>
+                        </tr>
+                        <tr>
+                            <th>Country Name</th>
+                            <td>@countryobj.Name</td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" @onclick="Delete"> Delete Country</button>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
-
-
 
 @code {
     public Country countryobj { get; set; } = new();
@@ -37,6 +39,7 @@
     [Parameter]
     public int id { get; set; }
 
+    public Country country = new Country();
 
     protected override async Task OnInitializedAsync()
     {

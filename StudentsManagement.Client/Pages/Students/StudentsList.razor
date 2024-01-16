@@ -1,68 +1,75 @@
 ﻿@page "/students-list"
-@using StudentsManagement.Client.Services;
 @using StudentsManagement.Shared.Models
 @inject NavigationManager navigation;
 @inject IJSRuntime JsRuntime
 
-<div class="container">
-    <div class="row">
-        <p><a class="btn btn-success float-end" href="/add-student"> Add New Student </a></p>
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header"></div>
-                @if (!AllStudents.Any())
-                {
-                    <p><em>Loading Students...</em></p>
-                }
-               @if (AllStudents.Any())
-                {
-                    <div class="card-body">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>FirstName</th>
-                                    <th>MiddleName</th>
-                                    <th>LastName</th>
-                                    <th>Email</th>
-                                    <th>PhoneNo</th>
-                                    <th>Country</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var student in AllStudents)
-                                {
-                                    <tr>
-                                        <td>@student.Id</td>
-                                        <td>@student.FirstName</td>
-                                        <td>@student.MiddleName</td>
-                                        <td>@student.LastName</td>
-                                        <td>@student.EmailAddress</td>
-                                        <td>@student.PhoneNumber</td>
-                                        <td>@student.Country</td>
-                                        <td>
-                                            <a class="btn btn-success" href="/student/edit/@student.Id"> Edit </a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-danger" href="/student/delete/@student.Id"> Delete </a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Students List</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <p><a class="btn btn-success float-end" href="/add-student"> Add New Student </a></p>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header"></div>
+                            @if (!AllStudents.Any())
+                            {
+                                <p><em>Loading Students...</em></p>
+                            }
+                            @if (AllStudents.Any())
+                            {
+                                <div class="card-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>FirstName</th>
+                                                <th>MiddleName</th>
+                                                <th>LastName</th>
+                                                <th>Email</th>
+                                                <th>PhoneNo</th>
+                                                <th>Country</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var student in AllStudents)
+                                            {
+                                                <tr>
+                                                    <td>@student.Id</td>
+                                                    <td>@student.FirstName</td>
+                                                    <td>@student.MiddleName</td>
+                                                    <td>@student.LastName</td>
+                                                    <td>@student.EmailAddress</td>
+                                                    <td>@student.PhoneNumber</td>
+                                                    <td>@student.Country.Name</td>
+                                                    <td>
+                                                        <a class="btn btn-success" href="/student/edit/@student.Id"> Edit </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-danger" href="/student/delete/@student.Id"> Delete </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info"> There is not Students List Availlable</div>
+                            }
+                        </div>
                     </div>
-                }
-                else
-                {
-                <div class="alert alert-info"> There is not Students List Availlable</div>
-                }
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 @code {
 
     public List<Student> AllStudents { get; set; } = new();
@@ -72,8 +79,12 @@
         await LoadAlLStudents();
     }
 
+
+    public Student student = new Student();
+
     public async Task LoadAlLStudents()
     {
+        // var students = await GenericService.GetAllAsync(student, "api/Student/All-Students");
         var students = await StudentService.GetAllStudentsAsync();
         AllStudents.Clear();
 

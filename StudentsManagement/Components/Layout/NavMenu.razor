@@ -1,70 +1,84 @@
 ﻿@implements IDisposable
 
 @inject NavigationManager NavigationManager
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a href="index3.html" class="brand-link">
+        <img src="AdminLTE/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Students</span>
+    </a>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="AdminLTE/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">Macro Code</a>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item menu-open">
+                    <NavLink href="" Match="NavLinkMatch.All" class="nav-link active">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
+                    </NavLink>
 
-<div class="top-row ps-3 navbar navbar-dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="">Students Management</a>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="students-list" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Students
+                        </p>
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="parents-list" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Parents
+                        </p>
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="teachers-list" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Teachers
+                        </p>
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="countries-list" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Countries
+                        </p>
+                    </NavLink>
+                </li>
+
+                <li class="nav-item">
+                    <NavLink href="systemcodes-list" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            System Codes
+                        </p>
+                    </NavLink>
+                </li>
+                <li class="nav-item">
+                    <NavLink href="systemcodesdetails-list" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            System Code Details
+                        </p>
+                    </NavLink>
+                </li>
+            </ul>
+        </nav>
     </div>
-</div>
-
-<input type="checkbox" title="Navigation menu" class="navbar-toggler" />
-
-<div class="nav-scrollable" onclick="document.querySelector('.navbar-toggler').click()">
-    <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="students-list">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Students
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="countries-list">
-                <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Countries
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="auth">
-                <span class="bi bi-lock-nav-menu" aria-hidden="true"></span> Auth Required
-            </NavLink>
-        </div>
-
-        <AuthorizeView>
-            <Authorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Manage">
-                        <span class="bi bi-person-fill-nav-menu" aria-hidden="true"></span> @context.User.Identity?.Name
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <form action="Account/Logout" method="post">
-                        <AntiforgeryToken />
-                        <input type="hidden" name="ReturnUrl" value="@currentUrl" />
-                        <button type="submit" class="nav-link">
-                            <span class="bi bi-arrow-bar-left-nav-menu" aria-hidden="true"></span> Logout
-                        </button>
-                    </form>
-                </div>
-            </Authorized>
-            <NotAuthorized>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Register">
-                        <span class="bi bi-person-nav-menu" aria-hidden="true"></span> Register
-                    </NavLink>
-                </div>
-                <div class="nav-item px-3">
-                    <NavLink class="nav-link" href="Account/Login">
-                        <span class="bi bi-person-badge-nav-menu" aria-hidden="true"></span> Login
-                    </NavLink>
-                </div>
-            </NotAuthorized>
-        </AuthorizeView>
-    </nav>
-</div>
+</aside>
 
 @code {
     private string? currentUrl;

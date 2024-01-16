@@ -1,0 +1,99 @@
+﻿@page "/parents-list"
+@using StudentsManagement.Shared.Models
+@inject NavigationManager navigation;
+@inject IJSRuntime JsRuntime
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Students Parents</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <p><a class="btn btn-success float-end" href="/add-parent"> Add New Parent </a></p>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header"></div>
+                            @if (!AllParents.Any())
+                            {
+                                <p><em>Loading Parents...</em></p>
+                            }
+                            @if (AllParents.Any())
+                            {
+                                <div class="card-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>FirstName</th>
+                                                <th>MiddleName</th>
+                                                <th>LastName</th>
+                                                <th>Email</th>
+                                                <th>PhoneNo</th>
+                                                <th>Student</th>
+                                                <th>Edit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var parent in AllParents)
+                                            {
+                                                <tr>
+                                                    <td>@parent.Id</td>
+                                                    <td>@parent.FirstName</td>
+                                                    <td>@parent.MiddleName</td>
+                                                    <td>@parent.LastName</td>
+                                                    <td>@parent.EmailAddress</td>
+                                                    <td>@parent.PhoneNumber</td>
+                                                    <td>@parent.Student.FullName</td>
+                                                    <td>
+                                                        <a class="btn btn-success" href="/parent/edit/@parent.Id"> Edit </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info"> There is not Parents List Availlable</div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+
+    public List<Parent> AllParents { get; set; } = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAllParents();
+    }
+
+    public async Task LoadAllParents()
+    {
+        var data = await ParentService.GetAllAsync();
+        AllParents.Clear();
+
+        if (data is null) return;
+        foreach (var item in data)
+        {
+            AllParents.Add(item);
+        }
+    }
+
+    private void EditStudent(int id)
+    {
+        navigation.NavigateTo($"/student/edit/{id}");
+    }
+
+    private async Task DeleteStudent(int Id)
+    {
+        var result = await ParentService.DeleteAsync(Id);
+        await LoadAllParents();
+    }
+}

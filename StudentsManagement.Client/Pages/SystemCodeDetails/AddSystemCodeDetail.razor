@@ -1,0 +1,78 @@
+﻿@page "/add-systemCodeDetail"
+@using StudentsManagement.Shared.Models
+@inject NavigationManager navigation;
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Add New System Code Details</h3>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <EditForm Model="systemcodeDetailobj" OnValidSubmit="CreateSystemCodeDetail" FormName="addSystemCodeDetail">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Code</label>
+                                        <InputText for="Code" class="form-control" @bind-Value="@systemcodeDetailobj.Code" />
+                                        <ValidationMessage For="()=>systemcodeDetailobj.Code" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Description</label>
+                                        <InputText for="Description" class="form-control" @bind-Value="@systemcodeDetailobj.Description" />
+                                        <ValidationMessage For="()=>systemcodeDetailobj.Description" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">System Code</label>
+                                        <InputSelect for="SystemCodeId" class="form-control" @bind-Value="@systemcodeDetailobj.SystemCodeId">
+                                            <option value="">Select System Code</option>
+                                            @foreach (var systemcode in SystemCodes)
+                                            {
+                                                <option value="@systemcode.Id">@systemcode.Description</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For="()=>systemcodeDetailobj.SystemCodeId" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4">
+                                <button type="submit" class="btn btn-primary">Save System Code Detail</button>
+                                <button type="button" @onclick="()=>Cancel()" class="btn btn-danger">Back to List</button>
+                            </div>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    [SupplyParameterFromForm]
+    public SystemCodeDetail systemcodeDetailobj { get; set; } = new();
+
+    List<SystemCode> SystemCodes = new List<SystemCode>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        SystemCodes = await SystemCodeService.GetAllAsync();
+    }
+
+    protected async Task CreateSystemCodeDetail()
+    {
+        var result = await SystemCodeDetailService.AddAsync(systemcodeDetailobj);
+        navigation.NavigateTo("/systemcodesdetails-list");
+    }
+    public void Cancel()
+    {
+        navigation.NavigateTo("/systemcodesdetails-list");
+    }
+}

@@ -22,17 +22,19 @@ namespace StudentsManagement.Controllers
         }
 
         // GET: api/SystemCodeDetails
-        [HttpGet("All-SystemCodeDetails")]
+        [HttpGet("All")]
         public async Task<ActionResult<IEnumerable<SystemCodeDetail>>> GetAllSystemCodeDetails()
         {
-            return await _context.SystemCodeDetails.ToListAsync();
+            return await _context.SystemCodeDetails
+                .Include(x=>x.SystemCode).ToListAsync();
         }
 
         // GET: api/SystemCodeDetails/5
-        [HttpGet("Single-SystemCodeDetail/{id}")]
+        [HttpGet("Single/{id}")]
         public async Task<ActionResult<SystemCodeDetail>> GetSingleSystemCodeDetail(int id)
         {
-            var systemCodeDetail = await _context.SystemCodeDetails.FindAsync(id);
+            var systemCodeDetail = await _context.SystemCodeDetails
+                .FindAsync(id);
 
             if (systemCodeDetail == null)
             {
@@ -42,9 +44,18 @@ namespace StudentsManagement.Controllers
             return systemCodeDetail;
         }
 
+        // GET: api/SystemCodeDetails/5
+        [HttpGet("AllByCode/{id}")]
+        public async Task<ActionResult<IEnumerable<SystemCodeDetail>>> GetSystemCodeDetailsByCode(string id)
+        {
+            var systemCodeDetail = await _context.SystemCodeDetails.Include(x=>x.Code== id)
+                .ToListAsync();
+            return systemCodeDetail;
+        }
+
         // PUT: api/SystemCodeDetails/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("Update-SystemCodeDetail/{id}")]
+        [HttpPut("Update/{id}")]
         public async Task<IActionResult> UpdateSystemCodeDetail(int id, SystemCodeDetail systemCodeDetail)
         {
             if (id != systemCodeDetail.Id)
@@ -75,7 +86,7 @@ namespace StudentsManagement.Controllers
 
         // POST: api/SystemCodeDetails
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost("Add-SystemCodeDetail")]
+        [HttpPost("Add")]
         public async Task<ActionResult<SystemCodeDetail>> AddNewSystemCodeDetail(SystemCodeDetail systemCodeDetail)
         {
             _context.SystemCodeDetails.Add(systemCodeDetail);
@@ -85,7 +96,7 @@ namespace StudentsManagement.Controllers
         }
 
         // DELETE: api/SystemCodeDetails/5
-        [HttpDelete("Delete-SystemCodedetail/{id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteSystemCodeDetail(int id)
         {
             var systemCodeDetail = await _context.SystemCodeDetails.FindAsync(id);

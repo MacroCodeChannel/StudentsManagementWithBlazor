@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StudentsManagement.Client.StudentRepository;
+using StudentsManagement.Client.Repository;
 using StudentsManagement.Data;
 using StudentsManagement.Shared.Models;
 

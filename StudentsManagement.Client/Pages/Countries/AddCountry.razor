@@ -1,47 +1,51 @@
 ﻿@page "/add-country"
-@using StudentsManagement.Client.Services;
 @using StudentsManagement.Shared.Models
 @inject NavigationManager navigation;
 
-<h3>Add Country</h3>
 <div class="row">
-    <div class="col-md-12">
-        <EditForm Model="countryobj" OnValidSubmit="CreateCountry" FormName="addCountry">
-            <DataAnnotationsValidator />
-            <ValidationSummary />
-            <div class="col-md-12">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label">Country Code</label>
-                            <InputText for="Code" class="form-control" @bind-Value="@countryobj.Code" />
-                            <ValidationMessage For="()=>countryobj.Code" />
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label">Country Name</label>
-                            <InputText for="Name" class="form-control" @bind-Value="@countryobj.Name" />
-                            <ValidationMessage For="()=>countryobj.Name" />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group mt-4">
-                    <button type="submit" class="btn btn-primary">Save Country</button>
-                    <button type="button" @onclick="()=>Cancel()" class="btn btn-danger">Back to List</button>
-                </div>
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Add New Country</h3>
             </div>
-        </EditForm>
+            <div class="card-body">
+                <EditForm Model="countryobj" OnValidSubmit="CreateCountry" FormName="addCountry">
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Country Code</label>
+                                    <InputText for="Code" class="form-control" @bind-Value="@countryobj.Code" />
+                                    <ValidationMessage For="()=>countryobj.Code" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Country Name</label>
+                                    <InputText for="Name" class="form-control" @bind-Value="@countryobj.Name" />
+                                    <ValidationMessage For="()=>countryobj.Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-primary">Save Country</button>
+                            <button type="button" @onclick="()=>Cancel()" class="btn btn-danger">Back to List</button>
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
     </div>
 </div>
-
 @code {
     [SupplyParameterFromForm]
     public Country countryobj { get; set; } = new();
 
     protected async Task CreateCountry()
     {
-        var result = await CountryService.AddAsync(countryobj);
+        var result = CountryService.AddAsync(countryobj);
         navigation.NavigateTo("/countries-list");
     }
     public void Cancel()

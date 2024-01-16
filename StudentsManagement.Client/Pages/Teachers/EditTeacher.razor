@@ -1,0 +1,179 @@
+﻿@page "/teacher/edit/{id:int}"
+@using StudentsManagement.Shared.Models
+@inject NavigationManager navigation;
+@inject IJSRuntime JsRuntime
+@rendermode InteractiveServer
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Update Teacher Details</h3>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <EditForm Model="teachobj" OnValidSubmit="UpdateTeacher" FormName="updateteacher">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">First Name</label>
+                                        <InputText for="FirstName" class="form-control" @bind-Value="@teachobj.FirstName" />
+                                        <ValidationMessage For="()=>teachobj.FirstName" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Middle Name</label>
+                                        <InputText for="MiddleName" class="form-control" @bind-Value="@teachobj.MiddleName" />
+                                        <ValidationMessage For="()=>teachobj.MiddleName" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Last Name</label>
+                                        <InputText for="LastName" class="form-control" @bind-Value="@teachobj.LastName" />
+                                        <ValidationMessage For="()=>teachobj.LastName" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Gender</label>
+                                        <InputSelect for="GenderId" class="form-control" @bind-Value="@teachobj.GenderId">
+                                            <option value="">Select Gender</option>
+                                            @if (Gender != null && Gender.Any())
+                                            {
+                                                @foreach (var sex in Gender)
+                                                {
+                                                    <option value="@sex.Id">@sex.Description</option>
+                                                }
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For="()=>teachobj.GenderId" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Marital Status</label>
+                                        <InputSelect for="MaritalStatusId" class="form-control" @bind-Value="@teachobj.MaritalStatusId">
+                                            <option value="">Select Marital Status</option>
+                                            @if (MaritalStatus != null && MaritalStatus.Any())
+                                            {
+                                                @foreach (var status in MaritalStatus)
+                                                {
+                                                    <option value="@status.Id">@status.Description</option>
+                                                }
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For="()=>teachobj.MaritalStatusId" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Email Address</label>
+                                        <InputText for="EmailAddress" class="form-control" @bind-Value="@teachobj.EmailAddress" />
+                                        <ValidationMessage For="()=>teachobj.EmailAddress" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Address</label>
+                                        <InputText for="Address" class="form-control" @bind-Value="@teachobj.Address" />
+                                        <ValidationMessage For="()=>teachobj.Address" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Phone Number</label>
+                                        <InputText for="PhoneNumber" class="form-control" @bind-Value="@teachobj.PhoneNumber" />
+                                        <ValidationMessage For="()=>teachobj.PhoneNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Facebook Link</label>
+                                        <InputText for="FacebookLink" class="form-control" @bind-Value="@teachobj.FacebookLink" />
+                                        <ValidationMessage For="()=>teachobj.FacebookLink" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Twitter Link</label>
+                                        <InputText for="TwitterLink" class="form-control" @bind-Value="@teachobj.TwitterLink" />
+                                        <ValidationMessage For="()=>teachobj.TwitterLink" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">LinkedIn Link</label>
+                                        <InputText for="LinkedInLink" class="form-control" @bind-Value="@teachobj.LinkedInLink" />
+                                        <ValidationMessage For="()=>teachobj.LinkedInLink" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Designation</label>
+                                        <InputSelect for="DesignationId" class="form-control" @bind-Value="@teachobj.DesignationId">
+                                            <option value="">Select Designation</option>
+                                            @foreach (var type in Designations)
+                                            {
+                                                <option value="@type.Id">@type.Description</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For="()=>teachobj.DesignationId" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Date of Birth</label>
+                                        <InputDate for="DOB" class="form-control" @bind-Value="@teachobj.DOB" />
+                                        <ValidationMessage For="()=>teachobj.DOB" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4">
+                                <button type="submit" class="btn btn-primary">Save Teacher</button>
+                                <button type="button" @onclick="()=>Cancel()" class="btn btn-danger">Back to List</button>
+                            </div>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+
+    [SupplyParameterFromForm]
+    public Teacher teachobj { get; set; } = new();
+
+    List<SystemCodeDetail> Designations = new List<SystemCodeDetail>();
+
+    List<SystemCodeDetail> Gender = new List<SystemCodeDetail>();
+
+    List<SystemCodeDetail> MaritalStatus = new List<SystemCodeDetail>();
+
+    [Parameter]
+    public int id { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        teachobj = await TeacherService.GetByIdAsync(id);
+        Designations = await SystemCodeDetailService.GetByCodeAsync("Designation");
+        Gender = await SystemCodeDetailService.GetByCodeAsync("Gender");
+        MaritalStatus = await SystemCodeDetailService.GetByCodeAsync("MaritalStatus");
+    }
+
+    protected async Task UpdateTeacher()
+    {
+        var result = await TeacherService.UpdateAsync(teachobj);
+        navigation.NavigateTo("/teachers-list");
+    }
+    public void Cancel()
+    {
+        navigation.NavigateTo("/teachers-list");
+    }
+}

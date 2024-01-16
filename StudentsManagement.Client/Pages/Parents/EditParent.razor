@@ -1,0 +1,153 @@
+﻿@page "/parent/edit/{id:int}"
+@using StudentsManagement.Shared.Models
+@inject NavigationManager navigation;
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Update Parent Details</h3>
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <EditForm Model="parentobj" OnValidSubmit="UpdateParent" FormName="updateparent">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">First Name</label>
+                                        <InputText for="FirstName" class="form-control" @bind-Value="@parentobj.FirstName" />
+                                        <ValidationMessage For="()=>parentobj.FirstName" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Middle Name</label>
+                                        <InputText for="MiddleName" class="form-control" @bind-Value="@parentobj.MiddleName" />
+                                        <ValidationMessage For="()=>parentobj.MiddleName" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Last Name</label>
+                                        <InputText for="LastName" class="form-control" @bind-Value="@parentobj.LastName" />
+                                        <ValidationMessage For="()=>parentobj.LastName" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Email Address</label>
+                                        <InputText for="EmailAddress" class="form-control" @bind-Value="@parentobj.EmailAddress" />
+                                        <ValidationMessage For="()=>parentobj.EmailAddress" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Address</label>
+                                        <InputText for="Address" class="form-control" @bind-Value="@parentobj.Address" />
+                                        <ValidationMessage For="()=>parentobj.Address" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Phone Number</label>
+                                        <InputText for="PhoneNumber" class="form-control" @bind-Value="@parentobj.PhoneNumber" />
+                                        <ValidationMessage For="()=>parentobj.PhoneNumber" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Gender</label>
+                                        <InputSelect for="GenderId" class="form-control" @bind-Value="@parentobj.GenderId">
+                                            <option value="">Select Gender</option>
+                                            @if (Gender != null && Gender.Any())
+                                            {
+                                                @foreach (var sex in Gender)
+                                                {
+                                                    <option value="@sex.Id">@sex.Description</option>
+                                                }
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For="()=>parentobj.GenderId" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Student</label>
+                                        <InputSelect for="StudentId" class="form-control" @bind-Value="@parentobj.StudentId">
+                                            <option value="">Select Student</option>
+                                            @foreach (var student in Students)
+                                            {
+                                                <option value="@student.Id">@student.FullName</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For="()=>parentobj.StudentId" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Relationship Type</label>
+                                        <InputSelect for="ParentTypeId" class="form-control" @bind-Value="@parentobj.ParentTypeId">
+                                            <option value="">Select Parent Type</option>
+                                            @foreach (var type in ParentType)
+                                            {
+                                                <option value="@type.Id">@type.Description</option>
+                                            }
+                                        </InputSelect>
+                                        <ValidationMessage For="()=>parentobj.ParentTypeId" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Date of Birth</label>
+                                        <InputDate for="DOB" class="form-control" @bind-Value="@parentobj.DOB" />
+                                        <ValidationMessage For="()=>parentobj.DOB" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mt-4">
+                                <button type="submit" class="btn btn-primary">Save Parent</button>
+                                <button type="button" @onclick="()=>Cancel()" class="btn btn-danger">Back to List</button>
+                            </div>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+
+    [SupplyParameterFromForm]
+    public Parent parentobj { get; set; } = new();
+
+
+    [Parameter]
+    public int id { get; set; }
+
+    List<SystemCodeDetail> ParentType = new List<SystemCodeDetail>();
+
+    List<SystemCodeDetail> Gender = new List<SystemCodeDetail>();
+
+    List<Student> Students = new List<Student>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        parentobj = await ParentService.GetByIdAsync(id);
+        ParentType = await SystemCodeDetailService.GetByCodeAsync("ParentType");
+        Gender = await SystemCodeDetailService.GetByCodeAsync("Gender");
+        Students = await StudentService.GetAllStudentsAsync();
+    }
+
+    protected async Task UpdateParent()
+    {
+        var result = await ParentService.UpdateAsync(parentobj);
+        navigation.NavigateTo("/parents-list");
+    }
+    public void Cancel()
+    {
+        navigation.NavigateTo("/parents-list");
+    }
+}

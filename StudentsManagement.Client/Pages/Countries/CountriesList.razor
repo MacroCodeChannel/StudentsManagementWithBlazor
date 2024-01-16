@@ -1,63 +1,71 @@
 ﻿@page "/countries-list"
-@using StudentsManagement.Client.Services;
 @using StudentsManagement.Shared.Models
 @inject NavigationManager navigation;
 @inject IJSRuntime JsRuntime
-
-<div class="container">
-    <div class="row">
-        <p><a class="btn btn-success float-end" href="/add-country">Add New Country</a></p>
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header"></div>
-                @if (!AllCountries.Any())
-                {
-                    <p><em>Loading Countries...</em></p>
-                }
-                @if (AllCountries.Any())
-                {
-                    <div class="card-body">
-                        <table class="table table-striped table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Id</th>
-                                    <th>Country Code</th>
-                                    <th>Country Name</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var country in AllCountries)
-                                {
-                                    <tr>
-                                        <td>@country.Id</td>
-                                        <td>@country.Code</td>
-                                        <td>@country.Name</td>
-                                        <td>
-                                            <a class="btn btn-success" href="/country/edit/@country.Id"> Edit </a>
-                                        </td>
-                                        <td>
-                                            <a class="btn btn-danger" href="/country/delete/@country.Id"> Delete </a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Countries List</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <p><a class="btn btn-success float-end" href="/add-country">Add New Country</a></p>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header"></div>
+                            @if (!AllCountries.Any())
+                            {
+                                <p><em>Loading Countries...</em></p>
+                            }
+                            @if (AllCountries.Any())
+                            {
+                                <div class="card-body">
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Country Code</th>
+                                                <th>Country Name</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var country in AllCountries)
+                                            {
+                                                <tr>
+                                                    <td>@country.Id</td>
+                                                    <td>@country.Code</td>
+                                                    <td>@country.Name</td>
+                                                    <td>
+                                                        <a class="btn btn-success" href="/country/edit/@country.Id"> Edit </a>
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-danger" href="/country/delete/@country.Id"> Delete </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-info"> There is no Countries List Availlable</div>
+                            }
+                        </div>
                     </div>
-                }
-                else
-                {
-                    <div class="alert alert-info"> There is no Countries List Availlable</div>
-                }
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-
 @code {
     public List<Country> AllCountries { get; set; } = new();
+
+    public Country country = new Country();
 
     protected override async Task OnInitializedAsync()
     {

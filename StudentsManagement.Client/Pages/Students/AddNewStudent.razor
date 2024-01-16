@@ -1,5 +1,4 @@
 ﻿@page "/add-student"
-@using StudentsManagement.Client.Services;
 @using StudentsManagement.Shared.Models
 @inject NavigationManager navigation;
 
@@ -14,6 +13,13 @@
             <ValidationSummary />
             <div class="col-md-12">
                 <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Registration No</label>
+                            <InputText for="RegistrationNo" class="form-control" @bind-Value="@studobj.RegistrationNo" />
+                            <ValidationMessage For="()=>studobj.RegistrationNo" />
+                        </div>
+                    </div>
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="control-label">First Name</label>
@@ -44,7 +50,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label">Student Address</label>
+                            <label class="control-label">Address</label>
                             <InputText for="Address" class="form-control" @bind-Value="@studobj.Address" />
                             <ValidationMessage For="()=>studobj.Address" />
                         </div>
@@ -58,15 +64,38 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label">Student Country</label>
-                            <InputSelect for="Country" class="form-control" @bind-Value="@studobj.Country">
+                            <label class="control-label">Country</label>
+                            <InputSelect for="CountryId" class="form-control" @bind-Value="@studobj.CountryId">
                                 <option value="">Select Country</option>
                                 @foreach(var country in Countries)
                                 {
-                                    <option  value="@country.Name">@country.Name</option>
+                                    <option  value="@country.Id">@country.Name</option>
                                 }
                              </InputSelect>
-                            <ValidationMessage For="()=>studobj.Country" />
+                            <ValidationMessage For="()=>studobj.CountryId" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Gender</label>
+                            <InputSelect for="GenderId" class="form-control" @bind-Value="@studobj.GenderId">
+                                <option value="">Select Gender</option>
+                                @if (Gender !=null && Gender.Any())
+                                {
+                                    @foreach (var sex in Gender)
+                                    {
+                                        <option value="@sex.Id">@sex.Description</option>
+                                    }
+                                }
+                            </InputSelect>
+                            <ValidationMessage For="()=>studobj.GenderId" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label">Date of Birth</label>
+                            <InputDate for="DOB" class="form-control" @bind-Value="@studobj.DOB" />
+                            <ValidationMessage For="()=>studobj.DOB" />
                         </div>
                     </div>
                 </div>
@@ -87,9 +116,12 @@
 
     List<Country> Countries = new List<Country>();
 
+    List<SystemCodeDetail> Gender = new List<SystemCodeDetail>();
+
     protected override async Task OnInitializedAsync()
     {
         Countries = await CountryService.GetAllAsync();
+        Gender = await SystemCodeDetailService.GetByCodeAsync("Gender");
     }
 
     protected async Task CreateStudent()

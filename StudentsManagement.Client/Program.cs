@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.AspNetCore.Http;
 using StudentsManagement.Client;
-using StudentsManagement.Client.Services;
-using StudentsManagement.Client.StudentRepository;
+using StudentsManagement.Client.Interfaces;
+using StudentsManagement.Client.Repository;
 using System.Net.Http;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
@@ -13,8 +13,7 @@ builder.Services.AddAuthorizationCore();
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddSingleton<AuthenticationStateProvider, PersistentAuthenticationStateProvider>();
 
-builder.Services.AddScoped<IStudentRepository, StudentService>();
-builder.Services.AddScoped<ICountryRepository, CountryService>();
+
 
 builder.Services.AddScoped(http => new HttpClient
 {

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using StudentsManagement.Client.StudentRepository;
+using StudentsManagement.Client.Repository;
 using StudentsManagement.Data;
 using StudentsManagement.Services;
 using StudentsManagement.Shared.Models;
@@ -17,9 +17,12 @@ namespace StudentsManagement.Controllers
     public class CountriesController : ControllerBase
     {
         private readonly ICountryRepository _countryRepository;
-        public CountriesController(ICountryRepository countryRepository)
+
+        private readonly ApplicationDbContext _context;
+        public CountriesController(ICountryRepository countryRepository, ApplicationDbContext context)
         {
             this._countryRepository = countryRepository;
+            _context = context;
         }
 
         // GET: api/Countries
@@ -35,7 +38,7 @@ namespace StudentsManagement.Controllers
         [HttpGet("Single-Country/{id}")]
         public async Task<ActionResult<Country>> GetSingleCountry(int id)
         {
-            var country = await _countryRepository.GetByIdAsync(id);
+            var country = await _context.Countries.FindAsync(id);
 
             if (country == null)
             {
