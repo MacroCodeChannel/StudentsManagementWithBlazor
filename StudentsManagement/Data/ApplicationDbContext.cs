@@ -15,6 +15,7 @@ namespace StudentsManagement.Data
 
         public DbSet<Parent> Parents { get; set; }
 
+        public DbSet<Subject> Subjects { get; set; }    
         public DbSet<Teacher> Teachers { get; set; }
         
         protected override void OnModelCreating(ModelBuilder builder)

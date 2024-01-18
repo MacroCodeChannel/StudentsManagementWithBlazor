@@ -49,7 +49,7 @@ builder.Services.AddScoped<ISystemCodeDetailRepository, SystemCodeDetailReposito
 builder.Services.AddScoped<ISystemCodeRepository, SystemCodeRepository>();
 builder.Services.AddScoped<IParentRepository, ParentRepository>();
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
-
+builder.Services.AddScoped<ISubjectRepository, SubjectRepository>();
 
 
 builder.Services.AddScoped(http => new HttpClient
